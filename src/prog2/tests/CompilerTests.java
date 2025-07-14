@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import junit.runner.Version;
 
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.StringReader;
@@ -65,7 +66,7 @@ public class CompilerTests {
 
 	protected void assertEqualsNormalized(final String expected, final String got) {
 		final String expected_normalized = normalizeString(expected);
-		final String got_normalized = normalizeString(got);
+		final String gotNormalized = normalizeString(got);
 
 		// FIXME: In JUnit < 5, assertEquals uses square brackets to indicate 
 		// the spot where the two strings differ. However, the abstract syntax
@@ -73,9 +74,9 @@ public class CompilerTests {
 		// therefore check for the version and manually fail the test if
 		// JUnit < 5 is used.
 		if (Version.id().startsWith("5")) {
-			assertEquals(expected_normalized, got_normalized);
-		} else if (!expected_normalized.equals(got_normalized)) {
-			fail("expected: <" + expected_normalized + "> but was <" + got_normalized + ">");
+			assertEquals(expected_normalized, gotNormalized);
+		} else if (!expected_normalized.equals(gotNormalized)) {
+			fail("expected: <" + expected_normalized + "> but was <" + gotNormalized + ">");
 		}
 	}
 

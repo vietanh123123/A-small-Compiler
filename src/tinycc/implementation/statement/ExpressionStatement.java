@@ -13,6 +13,6 @@ public class ExpressionStatement extends Statement {
     
     @Override
     public String toString() {
-        return exp.toString() + ";";
+        return exp.toString();
     }
 }

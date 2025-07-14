@@ -18,6 +18,6 @@ public class PointerType extends Type {
     
     @Override
     public String toString() {
-        return "Pointer[" + "Type_" + type.toString() + "]";
+        return "Pointer[" + type.toString() + "]";
     }
 }

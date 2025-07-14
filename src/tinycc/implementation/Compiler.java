@@ -36,7 +36,7 @@ public class Compiler {
 	 * @see ASTFactory
 	 */
 	public ASTFactory getASTFactory() {
-		throw new UnsupportedOperationException("TODO: implement this");
+		return new ASTFactoryImplement();
 	}
 
 	/**
