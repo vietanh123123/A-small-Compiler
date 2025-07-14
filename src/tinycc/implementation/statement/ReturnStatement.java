@@ -1,12 +1,14 @@
 package tinycc.implementation.statement;
 
 import tinycc.implementation.expression.Expression;
+import tinycc.diagnostic.Locatable;
 
 
 public class ReturnStatement extends Statement {
     public final Expression exp;  // Optional, can be null
 
-    public ReturnStatement(Expression exp) {
+    public ReturnStatement(Locatable loc, Expression exp) {
+        super(loc);
         this.exp = exp;
     }
 

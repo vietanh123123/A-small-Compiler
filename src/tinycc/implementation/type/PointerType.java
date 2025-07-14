@@ -1,11 +1,14 @@
 package tinycc.implementation.type;
 
+import tinycc.diagnostic.Locatable;
+
 
 
 public class PointerType extends Type {
     private final Type type;
 
-    public PointerType(Type type) {
+    public PointerType(Locatable loc, Type type) {
+        super(loc);
         this.type = type;
     }
 

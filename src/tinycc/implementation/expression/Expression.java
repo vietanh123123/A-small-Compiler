@@ -1,5 +1,7 @@
 package tinycc.implementation.expression;
 
+import tinycc.diagnostic.Locatable;
+
 /**
  * The main expression class (see project description)
  *
@@ -7,14 +9,21 @@ package tinycc.implementation.expression;
  * modified.
  */
 public abstract class Expression {
+    protected final Locatable loc;
 
-	/**
-	 * Creates a string representation of this expression.
-	 *
-	 * @remarks See project documentation.
-	 * @see StringBuilder
-	 */
-	@Override
-	public abstract String toString();
+    public Expression(Locatable loc) {
+        this.loc = loc;
+    }
 
+    public Locatable getLoc() {
+        return loc;
+    }
+
+    /**
+     * Creates a string representation of this expression.
+     *
+     * @remarks See project documentation.
+     * @see StringBuilder
+     */
+    public abstract String toString();
 }

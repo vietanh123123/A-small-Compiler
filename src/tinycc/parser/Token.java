@@ -60,7 +60,8 @@ public class Token extends Location {
 	public TokenKind getKind() {
 		return kind;
 	}
-
+    
+	
 	/**
 	 * The text of the token.
 	 *

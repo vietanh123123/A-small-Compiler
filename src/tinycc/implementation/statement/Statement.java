@@ -1,21 +1,26 @@
 package tinycc.implementation.statement;
 
-import tinycc.implementation.statement.block.BlockInside;
+
+import tinycc.diagnostic.Locatable;
+
+
 /**
  * The main statement class (see project description)
  *
  * You can change this class but the given name of the class must not be
  * modified.
  */
-public abstract class Statement implements BlockInside {
+public abstract class Statement {
+    protected final Locatable loc;
 
-	/**
-	 * Creates a string representation of this statement.
-	 *
-	 * @remarks See project documentation.
-	 * @see StringBuilder
-	 */
-	@Override
-	public abstract String toString();
+    public Statement(Locatable loc) {
+        this.loc = loc;
+    }
 
+    public Locatable getLoc() {
+        return loc;
+    }
+    
+    @Override
+    public abstract String toString();
 }

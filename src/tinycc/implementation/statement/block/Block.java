@@ -1,12 +1,14 @@
 package tinycc.implementation.statement.block;
 
 import tinycc.implementation.statement.Statement;
+import tinycc.diagnostic.Locatable;
 import java.util.List;
 
 public class Block extends Statement {
-    public final List<BlockInside> insides;
+    public final List<Statement> insides;
     
-    public Block(List<BlockInside> insides) {
+    public Block(Locatable loc, List<Statement> insides) {
+        super(loc);
         this.insides = insides;
     }
 
