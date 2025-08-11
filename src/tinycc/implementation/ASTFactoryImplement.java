@@ -10,7 +10,7 @@ import tinycc.implementation.expression.primary.Identifier;
 import tinycc.implementation.expression.primary.IntegerConstant;
 import tinycc.implementation.expression.primary.StringLiteral;
 import tinycc.implementation.expression.primary.CharacterConstant;
-import tinycc.implementation.expression.primary.FunctionCall;
+import tinycc.implementation.expression.function_call.FunctionCallExpression;
 import tinycc.implementation.expression.primary.ParenthesizedExpression;
 import tinycc.implementation.expression.binary.BinaryExpression;
 import tinycc.implementation.expression.binary.BinaryOperator;
@@ -26,8 +26,8 @@ import tinycc.implementation.statement.ReturnStatement;
 import tinycc.implementation.statement.WhileStatement;
 import tinycc.implementation.statement.block.Block;
 import tinycc.implementation.statement.block.Declaration;
-
-
+import tinycc.implementation.top_level_construct.ExternalDeclaration;
+import tinycc.implementation.top_level_construct.FunctionDeclaration;
 import tinycc.implementation.type.Type;
 import tinycc.implementation.type.BaseType;
 import tinycc.implementation.type.PointerType;
@@ -43,7 +43,7 @@ import java.util.Collections;
 public class ASTFactoryImplement implements ASTFactory{
     
     private final List<ExternalDeclaration> externalDeclarations = new ArrayList<>();
-    private final List<FunctionDefinition> functionDefinitions = new ArrayList<>();
+   
 
 
     @Override
@@ -184,22 +184,17 @@ public class ASTFactoryImplement implements ASTFactory{
 
     @Override
     public void createExternalDeclaration(Type type, Token name) {
-        externalDeclarations.add(new ExternalDeclaration(type, name));
+        // i dont know 
     }
 
     @Override
     public void createFunctionDefinition(Type type, Token name, List<Token> parameterNames, Statement body) {
-        functionDefinitions.add(new FunctionDefinition(type, name, parameterNames, body));
+        // add a new FunctionDeclaration to the list
+        // if body is null, it is a function declaration
+        // otherwise, it is a function 
     }
 
-    // Add getters to access the declarations
-    public List<ExternalDeclaration> getExternalDeclarations() {
-        return externalDeclarations;
-    }
-
-    public List<FunctionDefinition> getFunctionDefinitions() {
-        return functionDefinitions;
-    }
+    
 }
 
 

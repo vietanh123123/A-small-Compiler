@@ -4,6 +4,16 @@ import tinycc.implementation.expression.Expression;
 import tinycc.diagnostic.Locatable;
 import java.util.List;
 import java.util.Collections;
+import tinycc.implementation.Scope;
+import tinycc.diagnostic.Diagnostic;
+import tinycc.implementation.type.Type;
+import tinycc.implementation.type.BaseType;
+import tinycc.implementation.type.PointerType;
+import tinycc.implementation.type.TypeExpression;
+import tinycc.implementation.expression.primary.IntegerConstant;
+import tinycc.implementation.expression.primary.Identifier;
+import tinycc.implementation.expression.unary.UnaryExpression;
+import tinycc.implementation.expression.unary.UnaryOperator;
 
 public class FunctionCallExpression extends Expression {
     private final Expression function;
@@ -37,4 +47,10 @@ public class FunctionCallExpression extends Expression {
         sb.append("]");
         return sb.toString();
     }
+
+    @Override 
+    public abstract Type checkType(Diagnostic d, Scope s) {
+       //For every type of function call, check if 
+    }
+
 }

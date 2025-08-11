@@ -26,5 +26,21 @@ public class TypeExpression extends Type {
         return "Type_" + type.toString();
     }
     
- 
+    @Override 
+    public boolean isInt() {
+        return type == BaseType.INT;
+    }
+    @Override 
+    public boolean isChar() {
+        return type == BaseType.CHAR;
+    }
+    @Override 
+    public boolean isPointer() {
+        return false; 
+    }
+    @Override 
+    public boolean isVoid() {
+        return type == BaseType.VOID;
+    }
+
 }

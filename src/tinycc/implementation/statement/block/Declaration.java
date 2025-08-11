@@ -20,7 +20,9 @@ public class Declaration extends Statement {
         
     }
 
-    
+    public Type getType() {
+        return type;
+    }
 
     @Override
     public String toString() {

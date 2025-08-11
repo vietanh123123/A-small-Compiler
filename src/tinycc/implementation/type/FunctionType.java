@@ -8,6 +8,7 @@ import tinycc.diagnostic.Locatable;
 public class FunctionType extends Type {
     private final Type returnType;
     private final List<Type> parameterTypes;
+
  
     public FunctionType(Locatable loc, Type returnType, List<Type> parameterTypes) {
         super(loc);
@@ -28,5 +29,23 @@ public class FunctionType extends Type {
         }
         result += "]";
         return result;
+    }
+
+    
+    @Override 
+    public boolean isInt() {
+        return false;
+    }
+    @Override 
+    public boolean isChar() {
+        return false;
+    }
+    @Override
+    public boolean isPointer() {
+        return false;
+    }
+    @Override
+    public boolean isVoid() {
+        return false;
     }
 }   

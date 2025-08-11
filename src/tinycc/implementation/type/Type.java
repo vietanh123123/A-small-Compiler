@@ -8,7 +8,7 @@ import tinycc.diagnostic.Locatable;
  * You can change this class but the given name of the class must not be
  * modified.
  */
-public abstract class Type {
+public abstract class Type implements Locatable {
     protected final Locatable loc;
 
     public Type(Locatable loc) {
@@ -18,7 +18,12 @@ public abstract class Type {
     public Locatable getLoc() {
         return loc;
     }
-
+    
+    public abstract boolean isInt() ;
+    public abstract boolean isChar() ;
+    public abstract boolean isVoid();
+    public abstract boolean isPointer();
+    
 	/**
 	 * Creates a string representation of this type.
 	 *
@@ -27,5 +32,12 @@ public abstract class Type {
 	 */
 	@Override
 	public abstract String toString();
+
+	@Override
+    public String getInputName() { return loc.getInputName(); }
+    @Override
+    public int getLine() { return loc.getLine(); }
+    @Override
+    public int getColumn() { return loc.getColumn(); }
 
 }

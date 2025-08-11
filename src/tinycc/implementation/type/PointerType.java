@@ -11,6 +11,10 @@ public class PointerType extends Type {
         super(loc);
         this.type = type;
     }
+    public PointerType(Type type) {
+        super(null);  // Assuming loc is not needed for pointer types if not specified
+        this.type = type;
+    }
 
     public Type getType() {
         return type;
@@ -19,5 +23,21 @@ public class PointerType extends Type {
     @Override
     public String toString() {
         return "Pointer[" + type.toString() + "]";
+    }
+    @Override 
+    public boolean isInt() {
+        return false;
+    }
+    @Override 
+    public boolean isChar() {
+        return false;
+    }
+    @Override
+    public boolean isPointer() {
+        return true;
+    }
+    @Override
+    public boolean isVoid() {
+        return false;
     }
 }
