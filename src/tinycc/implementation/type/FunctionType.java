@@ -48,4 +48,9 @@ public class FunctionType extends Type {
     public boolean isVoid() {
         return false;
     }
+    
+    @Override
+    public boolean isFunction() {
+        return true;
+    }
 }   

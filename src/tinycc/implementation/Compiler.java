@@ -6,6 +6,8 @@ import tinycc.parser.Lexer;
 import tinycc.parser.Parser;
 import tinycc.logic.Formula;
 import tinycc.asmgen.AsmGen;
+import tinycc.implementation.top_level_construct.TranslationUnit;
+import tinycc.implementation.top_level_construct.ExternalDeclaration;
 
 /**
  * The main compiler class.
@@ -18,6 +20,7 @@ import tinycc.asmgen.AsmGen;
 public class Compiler {
 
 	Diagnostic diagnostic;
+	private TranslationUnit translationUnit;
 
 	/**
 	 * Initializes the compiler class with the given diagnostic module
@@ -49,8 +52,10 @@ public class Compiler {
 	 *          class.
 	 */
 	public void parseTranslationUnit(final Lexer lexer) {
-		Parser parser = new Parser(diagnostic, lexer, this.getASTFactory());
+		ASTFactoryImplement astFactory = new ASTFactoryImplement();
+		Parser parser = new Parser(diagnostic, lexer, astFactory);
 		parser.parseTranslationUnit();
+		this.translationUnit = astFactory.getTranslationUnit();
 	}
 
 	/**
@@ -61,7 +66,18 @@ public class Compiler {
 	 *          invoked only once in each instance of the compiler class.
 	 */
 	public void checkSemantics() {
-		throw new UnsupportedOperationException("TODO: implement this");
+		if (translationUnit == null) {
+			diagnostic.printError(null, "No translation unit to check semantics for");
+			return;
+		}
+		
+		// Create a global scope for semantic analysis
+		Scope globalScope = new Scope();
+		
+		// Check semantics for all external declarations
+		for (ExternalDeclaration extDecl : translationUnit.externalDeclarations) {
+			extDecl.checkSemantics(globalScope, diagnostic);
+		}
 	}
 
 	/**

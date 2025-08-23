@@ -1,6 +1,8 @@
 package tinycc.implementation.top_level_construct;
 
 import tinycc.diagnostic.Locatable;
+import tinycc.diagnostic.Diagnostic;
+import tinycc.implementation.Scope;
 
 
 
@@ -18,6 +20,12 @@ public abstract class ExternalDeclaration implements Locatable{
     
     @Override 
     public abstract String toString();
+    
+    /**
+     * Checks the semantics of this external declaration.
+     */
+    public abstract void checkSemantics(Scope globalScope, Diagnostic diagnostic);
+    
     @Override
     public int getLine() { return loc.getLine(); }
     @Override

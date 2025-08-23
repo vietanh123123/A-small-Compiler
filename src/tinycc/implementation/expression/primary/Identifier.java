@@ -2,9 +2,8 @@ package tinycc.implementation.expression.primary;
 
 import tinycc.implementation.expression.Expression;
 import tinycc.diagnostic.Locatable;
-import tinycc.implementation.type.BaseType;
 import tinycc.implementation.type.Type;
-import tinycc.implementation.type.TypeExpression;
+import tinycc.implementation.type.ErrorType;
 import tinycc.diagnostic.Diagnostic;
 import tinycc.implementation.Scope;
 import tinycc.implementation.statement.block.Declaration;
@@ -33,8 +32,8 @@ public class Identifier extends Expression {
             //Return the type from the declaration 
             return decl.getType();
         } catch (IllegalArgumentException e) {
-            d.printError(this,"Undeclared Identifier" + name);
-            throw e;
+            d.printError(this, "Undeclared identifier: " + name);
+            return ErrorType.getInstance();
         }
     }
 }

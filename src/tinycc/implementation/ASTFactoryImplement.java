@@ -28,6 +28,10 @@ import tinycc.implementation.statement.block.Block;
 import tinycc.implementation.statement.block.Declaration;
 import tinycc.implementation.top_level_construct.ExternalDeclaration;
 import tinycc.implementation.top_level_construct.FunctionDeclaration;
+import tinycc.implementation.top_level_construct.Function;
+import tinycc.implementation.top_level_construct.NamedParameter;
+import tinycc.implementation.top_level_construct.TranslationUnit;
+import tinycc.implementation.top_level_construct.GlobalVariable;
 import tinycc.implementation.type.Type;
 import tinycc.implementation.type.BaseType;
 import tinycc.implementation.type.PointerType;
@@ -184,14 +188,41 @@ public class ASTFactoryImplement implements ASTFactory{
 
     @Override
     public void createExternalDeclaration(Type type, Token name) {
-        // i dont know 
+        // Create a global variable declaration (not a function)
+        Identifier identifier = new Identifier(name, name.getText());
+        GlobalVariable globalVar = new GlobalVariable(name, type, identifier);
+        externalDeclarations.add(globalVar);
     }
 
     @Override
     public void createFunctionDefinition(Type type, Token name, List<Token> parameterNames, Statement body) {
-        // add a new FunctionDeclaration to the list
-        // if body is null, it is a function declaration
-        // otherwise, it is a function 
+        // Create a function definition with a body
+        Identifier identifier = new Identifier(name, name.getText());
+        
+        // Convert parameter tokens to NamedParameter objects
+        List<NamedParameter> namedParams = new ArrayList<>();
+        if (parameterNames != null && type instanceof FunctionType) {
+            FunctionType funcType = (FunctionType) type;
+            List<Type> paramTypes = funcType.getParameterTypes();
+            for (int i = 0; i < parameterNames.size() && i < paramTypes.size(); i++) {
+                Token paramToken = parameterNames.get(i);
+                Identifier paramId = new Identifier(paramToken, paramToken.getText());
+                namedParams.add(new NamedParameter(paramTypes.get(i), paramId));
+            }
+        }
+        
+        // Cast body to Block (required by Function constructor)
+        Block blockBody = (body instanceof Block) ? (Block) body : null;
+        Function function = new Function(name, type, identifier, namedParams, blockBody);
+        externalDeclarations.add(function);
+    }
+
+    /**
+     * Gets the complete translation unit with all external declarations.
+     * @return TranslationUnit containing all parsed external declarations
+     */
+    public TranslationUnit getTranslationUnit() {
+        return new TranslationUnit(new ArrayList<>(externalDeclarations));
     }
 
     

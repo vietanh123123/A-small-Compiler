@@ -1,4 +1,4 @@
-package tinycc.driver;
+package tinycc.diagnostic.driver;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

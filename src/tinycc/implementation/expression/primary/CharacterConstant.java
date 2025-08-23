@@ -27,6 +27,7 @@ public class CharacterConstant extends Expression {
     }
     @Override
     public Type checkType(Diagnostic d, Scope s) {
-        return new TypeExpression(BaseType.CHAR);
+        // According to requirements: "Character and numeral constants are always of type int"
+        return new TypeExpression(BaseType.INT);
     }
 }
